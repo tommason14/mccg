@@ -14,5 +14,8 @@ Currently installed on Raijin, Magnus, Monarch, Massive and Stampede. Implemente
 ## generation of LAMMPS input files
 Scripts to generate a LAMMPS input file, along with a data file containing the appropriate force field parameters, given an xyz file with numbered atoms.
 
+## view_hessian_calculation.ipynb
+Takes a GAMESS log file as an input and produces an infrared spectra along with a molecule viewer to view all the vibrational modes of files generated using the FMO approach (also works with non-FMO).
+
 ## gamess_to_molden.py
-Parse GAMESS log files for use with [molden](http://cheminf.cmbi.ru.nl/molden/), allowing for easy viewing of geometries and frequencies generated using the FMO approach.
+Parse GAMESS log files for use with [molden](http://cheminf.cmbi.ru.nl/molden/), allowing for easy viewing of geometries, convergence, frequencies and vibrational modes generated using the FMO approach (also works with non-FMO).

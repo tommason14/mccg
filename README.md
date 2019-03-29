@@ -11,7 +11,7 @@ Automate processes such as
 
 Currently installed on Raijin, Magnus, Monarch, Massive and Stampede. Implemented for GAMESS, PSI4 and Gaussian calculations
 
-## Generation of LAMMPS input files
+## generation of LAMMPS input files
 Scripts to generate a LAMMPS input file, along with a data file containing the appropriate force field parameters, given an xyz file with numbered atoms.
 
 ## gamess_to_molden.py

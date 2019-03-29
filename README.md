@@ -2,7 +2,7 @@
 Repository for the Monash computational chemistry group
 
 # automating workflows
-## [qcp](github.com/tommason14/qcp)- Quantum Chemical Processor
+## [qcp](https://github.com/tommason14/qcp)- Quantum Chemical Processor
 Automate processes such as 
 - creating input and job files
 - recursive parsing of log files

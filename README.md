@@ -19,3 +19,16 @@ Takes a GAMESS log file as an input and produces an infrared spectra along with 
 
 ## gamess_to_molden.py
 Parse GAMESS log files for use with [molden](http://cheminf.cmbi.ru.nl/molden/), allowing for easy viewing of geometries, convergence, frequencies and vibrational modes generated using the FMO approach (also works with non-FMO).
+
+# useful aliases
+
+See how a GAMESS optimisation is running, using MP2:
+alias plotmp2="grep 'E(MP2)' | sed '/NaN/d' | tr -s [:blank:] | cut -d ' ' -f 3 | gnuplot -e \"set terminal dumb; plot '-    ' with lines notitle\""
+
+The sed command drops lines that occur with a corrupt Hessian.
+
+Use FMO? No problem:
+alias plotfmo="grep 'E corr MP2(2)=' | tr -s [:blank:] | cut -d ' ' -f 10 | gnuplot -e \"set terminal dumb; plot '-' with     lines notitle\""
+
+Solvation models? Use this:
+alias plotpcm="grep 'EMP2+EPCM' | tr -s [:blank:] | cut -d ' ' -f 3 | gnuplot -e \"set terminal dumb; plot '-' with lines notitle\""

@@ -28,6 +28,10 @@ Parse GAMESS log files for use with [molden](http://cheminf.cmbi.ru.nl/molden/),
 
 The sed command drops lines that occur with a corrupt Hessian.
 
+### Print the file to the screen and pipe into the alias:
+
+> cat file.log | plotmp2
+
 ## Use FMO? No problem:
 
 > alias plotfmo="grep 'E corr MP2(2)=' | tr -s [:blank:] | cut -d ' ' -f 10 | gnuplot -e \"set terminal dumb; plot '-' with     lines notitle\""

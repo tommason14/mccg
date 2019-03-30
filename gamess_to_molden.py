@@ -177,6 +177,16 @@ def find_init_coords(file):
     
     bohr_to_angs = 0.52917724899
     angs_to_bohr = 1.8897259886
+    
+    def append_to_lists(angs, bohrs, atoms):
+        
+        for index, atom in enumerate(atoms, 1):
+            sym, atnum, x, y, z = atom
+            angs.append(f"{sym:^3}{index:>4}{atnum:>4}{x:>12.6f}{y:>12.6f}{z:>12.6f}")
+            x, y, z = map(lambda num : num * angs_to_bohr, (x, y, z))
+            bohrs.append(f"{sym:^3}{x:>12.6f}{y:>12.6f}{z:>12.6f}")
+        return angs, bohrs 
+
 
     if fmo:
         calc = calc_type(file)
@@ -199,11 +209,7 @@ def find_init_coords(file):
                         atnum = get_atnum[sym]
                         atoms.append([sym, atnum, x, y, z])
 
-            for index, atom in enumerate(atoms, 1):
-                sym, atnum, x, y, z = atom
-                angs.append(f"{sym:^3}{index:>4}{atnum:>4}{x:>12.6f}{y:>12.6f}{z:>12.6f}")
-                x, y, z = map(lambda num : num * angs_to_bohr, (x, y, z))
-                bohrs.append(f"{sym:^3}{x:>12.6f}{y:>12.6f}{z:>12.6f}")
+            angs, bohrs = append_to_lists(angs, bohrs, atoms)
 
         else:
             found = False
@@ -223,11 +229,7 @@ def find_init_coords(file):
                         atnum = get_atnum[sym]
                         atoms.append([sym, atnum, x, y, z])
 
-            for index, atom in enumerate(atoms, 1):
-                sym, atnum, x, y, z = atom
-                angs.append(f"{sym:^3}{index:>4}{atnum:>4}{x:>12.6f}{y:>12.6f}{z:>12.6f}")
-                x, y, z = map(lambda num : num * angs_to_bohr, (x, y, z))
-                bohrs.append(f"{sym:^3}{x:>12.6f}{y:>12.6f}{z:>12.6f}")
+            angs, bohrs = append_to_lists(angs, bohrs, atoms)
 
     else:
         found = False
@@ -249,12 +251,7 @@ def find_init_coords(file):
                     atnum = int(atnum)
                     atoms.append([sym, atnum, x, y, z])
 
-        for index, atom in enumerate(atoms, 1):
-            sym, atnum, x, y, z = atom
-            angs.append(f"{sym:^3}{index:>4}{atnum:>4}{x:>12.6f}{y:>12.6f}{z:>12.6f}")
-            x, y, z = map(lambda num : num * angs_to_bohr, (x, y, z))
-            bohrs.append(f"{sym:^3}{x:>12.6f}{y:>12.6f}{z:>12.6f}")
-
+        angs, bohrs = append_to_lists(angs, bohrs, atoms)
     return bohrs, angs
 
 def find_geometries(file, num_atoms):

@@ -2,7 +2,7 @@
 Repository for the Monash computational chemistry group
 
 # Cloning
-If cloning this repository, use git clone --recurse-submodules https://github.com/tommason14/mccg, as qcp is added as a submodule from another repository
+If cloning this repository, use `git clone --recurse-submodules https://github.com/tommason14/mccg`, as qcp is added as a submodule from another repository
 
 # automating workflows
 
@@ -28,21 +28,15 @@ Parse GAMESS log files for use with [molden](http://cheminf.cmbi.ru.nl/molden/),
 
 # useful aliases
 
-## See how a GAMESS optimisation is running, using MP2:
+## Plot energies of optimisations in terminal
 
-> alias plotmp2="grep 'E(MP2)' | sed '/NaN/d' | tr -s [:blank:] | cut -d ' ' -f 3 | gnuplot -e \"set terminal dumb; plot '-    ' with lines notitle\""
+```bash
+alias plotmp2="grep 'E(MP2)' | sed '/NaN/d' | tr -s [:blank:] | cut -d ' ' -f 3 | gnuplot -e \"set terminal dumb; plot '-' with lines notitle\"" # Gamess MP2
 
-The sed command drops lines that occur with a corrupt Hessian.
+alias plotfmo="grep 'E corr MP2(2)=' | tr -s [:blank:] | cut -d ' ' -f 10 | gnuplot -e \"set terminal dumb; plot '-' with lines notitle\"" # Gamess FMO
 
-### Print the file to the screen and pipe into the alias:
+alias plotgauss="grep 'SCF Done' | tr -s [:blank:] | cut -d ' ' -f 6 | gnuplot -e \"set terminal dumb; plot '-' with lines notitle\"" # Gaussian opt
 
-> cat file.log | plotmp2
-
-## Use FMO? No problem:
-
-> alias plotfmo="grep 'E corr MP2(2)=' | tr -s [:blank:] | cut -d ' ' -f 10 | gnuplot -e \"set terminal dumb; plot '-' with     lines notitle\""
-
-## Solvation models? Use this:
-
-> alias plotpcm="grep 'EMP2+EPCM' | tr -s [:blank:] | cut -d ' ' -f 3 | gnuplot -e \"set terminal dumb; plot '-' with lines notitle\""
-
+# To plot:
+cat file.log | plotmp2
+```

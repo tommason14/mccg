@@ -1,14 +1,3 @@
-#!/bin/sh
-#SBATCH -N 1 # one node
-#SBATCH -n 1 # one task
-#SBATCH --cpus-per-task=46
-#SBATCH --time=10:00:00
-#SBATCH -p skx-normal
-#SBATCH --error=mixed-dimer.err
-
-module load gaussian
-
-time g16 << END > mixed-dimer.log
 %chk=mixed-dimer.chk
 %nproc=46
 %mem=160gb

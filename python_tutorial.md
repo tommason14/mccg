@@ -2,7 +2,8 @@
 
 Bored of repeating the same tasks again and again? Let the computer do the work, make your life easier and free up time for more interesting tasks.
 
-Python is widely applicable to a variety of tasks, from web-development to data science to file I/O operations.
+Python is widely applicable to a variety of tasks, from web-development to data
+science to filesystem operations.
 
 We will use Python to automate tasks needed to be performed frequently in computational chemistry.
 
@@ -49,6 +50,17 @@ An important concept in Python is that everything is an object, with a type. To 
 
 Comments can be written in Python using the `#` symbol, and multi-line comments
 are wrapped in triple quotes.
+
+```python
+
+# single line comments
+
+"""
+This is a 
+multi line
+comment
+"""
+```
 
 # Fundamental data types
 
@@ -546,7 +558,93 @@ same line!
 
 Writing 'procedural' code, line by line, can quickly get very confusing. A clearer way to layout code involves writing functions, pieces of code that can be re-used multiple times.
 
-For example, to add atomic numbers to a list of coordinates in an xyz format,
+## Function arguments
+
+In mathematics, function is something that can receive some input, modify that
+input, and produce some output. Functions in programming do the same thing, with
+the input included as arguments to the function. For example:
+
+```python
+
+def print_name(name):
+    print('My name is', name)
+
+print_name('Mary')
+print_name('David')
+
+# Output:
+# My name is Mary
+# My name is David
+```
+The function `print_name` is taking the name given as an argument and using the
+value in the function.
+
+In order for Python functions to use the data that you give them, arguments
+need to be defined, otherwise an error is given with variables used in the
+function not being defined:
+
+```python
+
+def func():
+    print(arg1)
+
+func()
+
+# Traceback (most recent call last):
+#   File "<stdin>", line 11, in <module>
+#   File "<stdin>", line 9, in func
+# NameError: name 'arg1' is not defined
+```
+
+Default values can be given, which are automatically used if no value is given:
+
+```python
+
+def add(num1, num2 = 5):
+    print(num1 + num2)
+
+add(5) 
+add(10, 20) 
+
+# Output:
+# 10 # only one argument passed
+# 30 # can overwrite the default value
+```
+
+Keyword arguments let you keep track of variables more easily- you know exactly
+what you are passing into each function. By defining the argument as `arg =
+None`, the user must write `arg = some value` when using the function in order
+to pass in a value, or an error is thrown:
+
+```python
+def add(val1, val2 = None):
+    print(val1 + val2)
+
+add(1)
+
+# Output:
+# Traceback (most recent call last):
+#   File "<stdin>", line 4, in <module>
+#   File "<stdin>", line 2, in addition
+# TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
+```
+
+To fix the error:
+
+```python
+
+addition(1, val2 = 10)
+
+# Output:
+# 11
+```
+This forces you to write readable code- it is clear that the number 10 is being
+assigned to the variable `val2`. Here, val2 is known as a keyword argument,
+defining the name of the argument in the function call.
+
+## Example use case
+
+To add atomic numbers to a list of coordinates in an xyz format,
 you could write something like this:
 
 ```text
@@ -574,24 +672,18 @@ with open('coords.xyz', 'r') as f:
         atnum = atnums[sym] 
         new_coords.append(f"{sym:<2} {atnum:<4} {x:<6} {y:<6} {z:<6}\n") #string formatting
 
-print(str(len(new_coords)) + '\n\n')
+print(str(len(new_coords)) + '\n')
 for line in new_coords:
-    print(line)
+    print(line, end='')
 
 # Output:
 # 5
 # 
-# 
-# C  6.0  13.456 12.321 13.054
-# 
+# C  6.0  13.456 12.321 13.054 
 # H  1.0  11.222 12.542 10.342
-# 
 # H  1.0  10.321 9.896  5.341
-# 
 # O  8.0  3.451  5.759  4.531
-# 
 # N  7.0  8.421  9.582  10.888
-# 
 ```
 
 This block defines a dictionary of atomic numbers for carbon, hydrogen, nitrogen
@@ -599,9 +691,9 @@ and oxygen, reads in the coordinates, finds the corresponding atomic number,
 then adds the number into
 the line and appends the new line to the `new_coords` list.
 
-The code can be re-written using functions, defining a function using the `def`
+The code above can be re-written using functions, defining a function using the `def`
 keyword. Comments can be added to each function definition using triple quotes,
-called a docstring:
+called a docstring.
 
 ```python
 
@@ -654,16 +746,16 @@ def print_coordinates(coordinates):
     Prints out the coordinates in an xyz format
     """
 
-    print(str(len(coords)) + '\n\n') 
+    print(str(len(coordinates)) + '\n') 
     # the length of list is an integer that needs converting to a string before adding newlines
     for coord in coordinates:
-        print(coord)
+        print(coord, end='')
 
 def main():
 
     coords = read_file('coords.xyz')
     new_coords = modify_coords(coords)
-    print_file(new_coords)
+    print_coordinates(new_coords)
 
 main()
 
@@ -691,7 +783,9 @@ for file in lst:
     write_file(new_coords)
 ```
 
-It's that easy!
+It's that easy! As your programs get longer, you will appreciate how useful
+functions can be.
+
 
 # Python modules- using external code
 
@@ -735,5 +829,77 @@ location can be found by typing
 ['/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages']
 ```
 
+# Have a go yourself
+
 Using the pointers given above, you can definitely start writing some useful
-programs! 
+programs! Many useful packages exist on PyPi, I recommend looking there, as many
+solutions to problems you might come across will have already been implemented
+in Python. See [here](https://pypi.org/).
+
+From here onwards, more advanced topics will be discussed, including generators
+and classes.
+
+# Advanced Python 
+
+# Generators
+
+# Classes
+
+Writing functions are very useful, enabling the user to calling the same block
+of code over and over. However, there is another branch of programming that
+allows users to write code in terms of real-world objects, called
+object-oriented programming.
+
+In the real-world, objects have physical attributes and behaviour. For example,
+humans have fingers, they have age, a height, and a weight. These are all
+atrributes. Behaviours associated with humans include speaking, eating and
+walking. In OOP, variables are known as attributes, and functions relating to
+the behaviour of an object are called methods.
+
+Objects can be written as classes, with the syntax `class object`. At the start
+of the tutorial, I [mentioned](#python-specifics) that everything in Python is an object with a
+defined type. This means that when we create a list, all we are doing is
+creating an *instance* of the `list` class.
+
+```python
+>>> lst = list() # create an instance of the list class
+>>> lst # empty list
+[]
+```
+
+The definition of a class can be empty! Using the `pass` keyword that lets
+Python know to do nothing. Attributes can assigned with the dot notation.
+
+```python
+class Human:
+    pass
+
+human = Human()
+human.hands = 2
+```
+
+We know that humans should have two hands- that shouldn't be something that a
+user has to add manually. So we can assign a `hands` attribute to every example of
+a Human that we create when calling the `Human` class i,e. `human = Human()`
+To do this, we use the `__init__` method, a reserved name in Python. Even
+though it is not explicitly declared in Python3, every class in Python is an instance of the
+`Object` class, and have an `__init__` method with the first argument of `self`.
+
+The attributes of each instance are tied to the class by using the `self`
+keyword. For example, creating a `Human` class with two hands:
+
+```python
+class Human:
+
+    def __init__(self)
+    self.hands = 2
+
+
+human = Human() # create an instance of the Human class
+print(human.hands) # each human has two hands
+
+Output:
+2
+```
+
+We can think of each instance of a class replacing the word `self`.

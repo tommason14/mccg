@@ -411,7 +411,7 @@ When `num2` was set to 10, Python broke out of the loop.
 # File operations
 
 Lots of menial tasks involve reading text files, modifying them, then writing the data to a new file.
-These tasks are simple using Python. To open a file, just use the `open` function. This takes two arguments, the file name and how you'd like to open it: in read mode, 'r', write mode, 'w', or append mode, 'a'. There are other options available for binary, such as 'rb' and 'wb'.
+These tasks are simple using Python. To open a file, just use the `open` function. This takes two arguments, the file name and how you'd like to open it: in read mode, `'r'`, write mode, `'w'`, or append mode, `'a'`. There are other options available for binary, such as `'rb'` and `'wb'`.
 Remember to close the file after you have finished processing it!
 
 ```python
@@ -431,13 +431,14 @@ To read the contents of a file, the `file.read()` command can be used.
 
 With the file called `file1.txt`:
 ```text
+# file1.txt
 one
 two
 three
 ```
 
 ```python
->>> with open('test', 'r') as f:
+>>> with open('file1.txt', 'r') as f:
 ...     contents = f.read() # store file in the variable 'contents'
 ...
 >>> contents
@@ -449,7 +450,7 @@ small files, this is not a problem, but for larger files, it is more efficient
 to store the data in a list, using `f.readlines()`.
 
 ```python
->>> with open('test', 'r') as f:
+>>> with open('file1.txt', 'r') as f:
 ...     contents = f.readlines() 
 ...
 >>> contents
@@ -461,7 +462,7 @@ you wish to process the file line-by-line, it is possible to do so without
 storing the data in a container. Just iterate over the file itself:
 
 ```python
->>> with open('test', 'r') as f:
+>>> with open('file1.txt', 'r') as f:
 ...     for line in f:
 ...         print(line)
 ...
@@ -476,7 +477,7 @@ Notice that the newline characters at the end of each line are printed, and can 
 `strip` method, applicable to any string:
 ```python
 
->>> with open('test', 'r') as f:
+>>> with open('file1.txt', 'r') as f:
 ...     for line in f:
 ...         print(line.strip())
 ...

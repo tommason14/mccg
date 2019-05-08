@@ -11,6 +11,8 @@ We will use Python to automate tasks needed to be performed frequently in comput
 
 # Table of Contents
 
+   * [Python tutorial](#python-tutorial)
+   * [Table of Contents](#table-of-contents)
    * [How to use Python?](#how-to-use-python)
    * [Python specifics](#python-specifics)
    * [Fundamental data types](#fundamental-data-types)
@@ -18,6 +20,7 @@ We will use Python to automate tasks needed to be performed frequently in comput
       * [Strings](#strings)
       * [Numerical values](#numerical-values)
       * [Boolean values](#boolean-values)
+      * [Type conversion](#type-conversion)
    * [Data structures](#data-structures)
       * [Lists](#lists)
       * [Tuples](#tuples)
@@ -35,6 +38,12 @@ We will use Python to automate tasks needed to be performed frequently in comput
    * [Advanced Python](#advanced-python)
    * [Generators](#generators)
    * [Classes](#classes)
+      * [Thought process](#thought-process)
+      * [Writing your own classes](#writing-your-own-classes)
+      * [__init__](#__init__)
+      * [Inheritance](#inheritance)
+      * [Data model](#data-model)
+  
 
 # How to use Python?
 
@@ -177,6 +186,37 @@ found = False
 if 'phrase' in line:
     found = True
 ```
+
+## Type conversion
+
+Often you will need to convert a string into an integer, or maybe a integer into
+a float. To convert to a string, use `str()`. To convert to integers and floats,
+use `int()` and `float()`.
+
+```python
+>>> integer = 3
+>>> type(integer)
+<class 'int'>
+>>> integer = str(integer) # now 'integer' is a string
+>>> type(integer)
+<class 'str'>
+
+# same for floats
+>>> string = '5.0'
+>>> string = float(string)
+>>> type(string)
+<class 'float'>
+```
+
+Strings can also be converted into lists. Read on for more information about lists.
+
+```python
+>>> string = 'string'
+>>> list(string)
+['s', 't', 'r', 'i', 'n', 'g']
+```
+
+
 
 # Data structures
 
@@ -910,6 +950,11 @@ doing is creating an *instance* of the `list` class.
 >>> lst # empty list
 []
 ```
+
+When we say `item = list(item)` to convert the item into a list, we are really creating
+an instance of the `list` class, and assigning that back to the variable called `item`.
+
+## Writing your own classes
 
 The definition of a class can be empty! Using the `pass` keyword that lets
 Python know to do nothing. Attributes can assigned with the dot notation.

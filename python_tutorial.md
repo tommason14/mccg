@@ -9,21 +9,26 @@ We will use Python to automate tasks needed to be performed frequently in comput
 > This tutorial is valid for Python 3.6 or later.
 
 
-## Basics
+# Python specifics
 
 Python relies on indentation to group lines of code together. Most languages use curly brackets, but by using white space, Python code is generally easier to read and write. Just try not to mix tabs with spaces as Python will not run if both are used. 
 
 An important concept in Python is that everything is an object, with a type. To find out what kind of object you are dealing with, use the function `type()`.
 
-## Fundamental data types
+# Fundamental data types
 
+## Variables
 
-To be able to pass information around in Python, that data needs to be stored in a variable, using the `=` sign:
-```
+To be able to pass information around in Python, that data needs to be stored in
+a variable, using the `=` sign:
+
+```python
 >>> var = 'Here is a sentence.'
 >>> var
 'Here is a sentence.'
 ```
+
+## Strings
 
 Text is entered as a `string` using quotation marks:
 
@@ -45,7 +50,9 @@ Notice that no spaces are added when strings are concatenated. To fix this, simp
 >>> text + ' ' +  more_text
 'This is a string of more text'
 ```
-Or print the text in a formatted string, known as an f-string, with variables printed using curly braces:
+Or print the text in a formatted string, known as an f-string, with variables
+printed using curly braces:
+
 ```python
 >>> print(f'{text} {more_text}')
 This is a string of more text
@@ -58,9 +65,10 @@ methods that have been implemented to make this easy.
 | :---: | :---:   |
 Start of string | `string.startswith(phrase)` |
 End of string  | `string.endswith(phrase)` |
-Anywhere | `if 'phrase' in string` or `string.contains(phrase) |
+Anywhere | `if 'phrase' in string` or `string.contains(phrase)` |
 
 
+## Numerical values
 
 Whole numbers are known as integers, with decimals called floats, as
 they contain floating point values. As you would expect, basic mathematical operations are supported 'out of the box', and integers and floats can be combined in the same expression:
@@ -82,9 +90,23 @@ they contain floating point values. As you would expect, basic mathematical oper
 3
 ```
 
-## Data structures
+## Boolean values
 
-### Lists
+Boolean values can take the value of `True` or `False`. For example, when
+looking for a certain phrase, a boolean variable named `found` can be defined,
+set to `False`. When the phrase is found, it can be set to `True`:
+
+```python
+
+found = False
+
+if 'phrase' in line:
+    found = True
+```
+
+# Data structures
+
+## Lists
 Variables are useful, but let's say you wanted to store multiple items together. Lists can be used to achieve this, written using square brackets:
 
 ```python
@@ -99,7 +121,10 @@ Properties of lists can be found using functions that were written to be applied
 3
 ```
 
-To access items, or elements, of each list, square bracket notation is used. Note that 'zero-indexing' is used in Python, with the first element in the list located at the 0th position:
+To access items, or elements, of each list, square bracket notation is used.
+Note that 'zero-indexing' is used in Python, with the first element in the list
+located at the 0th position:
+
 ```python
 >>> lst[0]
 1
@@ -142,54 +167,9 @@ However this just takes the contents of the list and repeats it three times...
 
 To do this, we have to move through the list and multiply each item as we go.
 
-Use a loop!
+Use a loop! See the loops section [here](#loops)
 
-### For loops
-
-Every data structure in Python that contains multiple items can be 'iterated' over using a `for` loop, with the syntax
-
-```python
-for item in iterable:
-  do_something_with_the_item()
-```
-
-Now, to multiple every item of the `items` list by 3:
-
-```python
->>> for item in items:
-...     multiple = item * 3
-...     print(multiple)
-...
-3
-6
-9
-```
-
-But the original list still contains the original values! The multiples need to be added to a new list:
-
-```python
->>> items
-[1, 2, 3] # The loop didn't change the original values
-
->>> multiples = []
->>> for item in items:
-...     multiple = item * 3
-...     multiples.append(multiple)
-...
->>> multiples
-[3, 6, 9]
-```
-
-List comprehensions are a nice way to achieve the same thing with less typing:
-
-```python
->>> multiples = [x * 3 for x in items]
->>> multiples
-[3, 6, 9]
->>>
-```
-
-Sometimes it useful to get the index of each item. This can be done using the
+Sometimes it useful to get the index of each item of a list. This can be done using the
 length of the list, or the `enumerate` method:
 ```python
 >>> lst = ['One', 'Two', 'Three']
@@ -205,11 +185,11 @@ or
 
 ```python
 >>> for index, item in enumerate(lst):
-...     print(f"Index {index} -> {item}")
+...     print(f"Index {index} = {item}")
 ...
-Index 0 -> One
-Index 1 -> Two
-Index 2 -> Three
+Index 0 = One
+Index 1 = Two
+Index 2 = Three
 ```
 
 The enumerate function actually returns a generator object (see later), with each index and item contained in a tuple:
@@ -221,7 +201,7 @@ The enumerate function actually returns a generator object (see later), with eac
 [(0, 'One'), (1, 'Two'), (2, 'Three')]
 ```
 
-### Tuples
+## Tuples
 
 Lists are mutable data types, where items in the list can be modified after being added to the list. Tuples are similar, but immutable- once a tuple is created, it cannot be changed. This can be useful when dealing with large amounts of data, and python runs faster when using tuples over lists. Tuples are assigned with parentheses:
 
@@ -240,7 +220,7 @@ Tuples are also iterable:
 3
 ```
 
-### Dictionaries
+## Dictionaries
 
 You may want to store data and refer to it later using another variable. For example, the names and ages of people. This can be done using a list of lists:
 
@@ -282,6 +262,13 @@ Much clearer! Ages can be accessed with the `values` method:
 35
 50
 25
+```
+
+To find the age of John:
+
+```python
+>>> people['John']
+35
 ```
 
 But wouldn't it be good to access both names and ages? This can be done with the `items` method:
@@ -348,7 +335,61 @@ To negate a comparison, use the `not` keyword:
 Not Jerry
 ```
 
+# Loops
 
+## For loops
+
+Every data structure in Python that contains multiple items can be 'iterated'
+over using a `for` loop, with the following syntax:
+
+```python
+for item in iterable:
+  do_something_with_the_item()
+```
+
+Now, to multiple every item of the `items` list by 3:
+
+```python
+>>> items = [1, 2, 3]
+>>> for item in items:
+...     multiple = item * 3
+...     print(multiple)
+...
+3
+6
+9
+```
+
+But the original list still contains the original values! The multiples need to be added to a new list:
+
+```python
+>>> items
+[1, 2, 3] # The loop didn't change the original values
+
+>>> multiples = []
+>>> for item in items:
+...     multiple = item * 3
+...     multiples.append(multiple)
+...
+>>> multiples
+[3, 6, 9]
+```
+
+List comprehensions are a nice way to achieve the same thing with less typing:
+
+```python
+>>> multiples = [x * 3 for x in items]
+>>> multiples
+[3, 6, 9]
+>>>
+```
+
+Useful keywords include `break` and `continue`. The `break` command forces
+Python to exit the loop immediately, and the `continue` keyword tells Python to
+skip this iteration and move to the next item in the list.
+
+
+## While loops
 
 The `while` loop can be used together with conditional statements like so:
 
@@ -366,6 +407,7 @@ num2 =  9
 
 When `num2` was set to 10, Python broke out of the loop.
 
+
 # File operations
 
 Lots of menial tasks involve reading text files, modifying them, then writing the data to a new file.
@@ -374,7 +416,7 @@ Remember to close the file after you have finished processing it!
 
 ```python
 f = open('file1.txt', 'r')
-process file...
+# process file...
 f.close()
 ```
 
@@ -382,17 +424,105 @@ To avoid having to write `f.close()`, use the `with` keyword that automatically 
 
 ```python
 with open('file1.txt', 'r') as f:
-    process file...
-    # Python closes file when the end of the block is reached
+    # process file...
 ```
 
+To read the contents of a file, the `file.read()` command can be used. 
 
+With the file called `file1.txt`:
+```text
+one
+two
+three
+```
 
-## Functions
+```python
+>>> with open('test', 'r') as f:
+...     contents = f.read() # store file in the variable 'contents'
+...
+>>> contents
+'one\ntwo\nthree\n'
+```
+
+`f.read()` returns one string containing the contents of the entire file. For
+small files, this is not a problem, but for larger files, it is more efficient
+to store the data in a list, using `f.readlines()`.
+
+```python
+>>> with open('test', 'r') as f:
+...     contents = f.readlines() 
+...
+>>> contents
+['one\n', 'two\n', 'three\n']
+```
+
+Again, for larger files storing the entire contents in a list is inefficient. If
+you wish to process the file line-by-line, it is possible to do so without
+storing the data in a container. Just iterate over the file itself:
+
+```python
+>>> with open('test', 'r') as f:
+...     for line in f:
+...         print(line)
+...
+one
+
+two
+
+three
+
+```
+Notice that the newline characters at the end of each line are printed, and can be dropped with the
+`strip` method, applicable to any string:
+```python
+
+>>> with open('test', 'r') as f:
+...     for line in f:
+...         print(line.strip())
+...
+one
+two
+three
+```
+
+This method of reading files is the fastest way of reading in plain text files-
+reading binary files is faster, but requires decoding to process the data.
+
+To write to a file, use the `'w'` argument with a file name:
+
+```python
+with open('new_file', 'w') as f:
+    f.write(content)
+```
+
+To write a list to a file:
+
+```python
+with open('new_file', 'w') as f:
+    for item in list:
+        f.write(item + '\n')
+```
+
+Don't forget the newline character otherwise all the items will be placed on the
+same line!
+
+# Functions
 
 Writing 'procedural' code, line by line, can quickly get very confusing. A clearer way to layout code involves writing functions, pieces of code that can be re-used multiple times.
 
-For example, to add atomic numbers to a list of coordinates in an xyz format, you could write something like this:
+For example, to add atomic numbers to a list of coordinates in an xyz format,
+you could write something like this:
+
+```text
+# coords.xyz
+5
+
+C  13.456 12.321 13.054
+H  11.222 12.542 10.342
+H  10.321  9.896  5.341
+O   3.451  5.759  4.531
+N   8.421  9.582 10.888
+```
 
 ```python
 atnums = {}
@@ -401,40 +531,46 @@ atnums['H'] = 1.0
 atnums['N'] = 7.0
 atnums['O'] = 8.0
 
-
-coords = """\
-C  13.456 12.321 13.054
-H  11.222 12.542 10.342
-H  10.321  9.896  5.341
-O   3.451  5.759  4.531
-N   8.421  9.582 10.888"""
-
-lines = coords.split('\n')
 new_coords = []
-for line in lines:
-    sym, x, y, z = line.split()
-    atnum = atnums[sym]
-    new_coords.append(f"{sym:<2} {atnum:<4} {x:<6} {y:<6} {z:<6}\n") #string formatting
+with open('coords.xyz', 'r') as f:
+    for line in f.readlines()[2:]: # list slicing to only select the coordinates
+        sym, x, y, z = line.split()
+        atnum = atnums[sym] 
+        new_coords.append(f"{sym:<2} {atnum:<4} {x:<6} {y:<6} {z:<6}\n") #string formatting
 
-new_coords = ''.join(new_coords)
-print(new_coords)
+print(str(len(new_coords)) + '\n\n')
+for line in new_coords:
+    print(line)
 
 Output:
+5
+
+
 C  6.0  13.456 12.321 13.054
+
 H  1.0  11.222 12.542 10.342
+
 H  1.0  10.321 9.896  5.341
+
 O  8.0  3.451  5.759  4.531
+
 N  7.0  8.421  9.582  10.888
+
 ```
 
-This block defines a dictionary of atomic numbers for carbon, hydrogen, nitrogen and oxygen, splits a multi-line string into coordinates for each atom, finds the corresponding atomic number, adds the number into the line, appends the new line to the `new_coords` list, then prints out the new list.
+This block defines a dictionary of atomic numbers for carbon, hydrogen, nitrogen
+and oxygen, reads in the coordinates, finds the corresponding atomic number,
+then adds the number into
+the line and appends the new line to the `new_coords` list.
 
 The code can be re-written using functions for clarity:
 ```python
 
 def read_file(file): 
-
-    return file.split('\n')
+    
+    with open(file, 'r') as f:
+        contents = f.readlines()[2:]
+    return contents
 
 def get_atomic_number(symbol):
 
@@ -447,7 +583,7 @@ def get_atomic_number(symbol):
     return atnums[symbol]    
 
 def add_atomic_number(line):
-    
+
     sym, x, y, z = line.split()
     atnum = get_atomic_number(sym) 
     return f"{sym:<2} {atnum:<4} {x:<6} {y:<6} {z:<6}\n"
@@ -459,25 +595,25 @@ def modify_coords(coords):
         new_coords.append(line)
     return new_coords
 
-def print_file(file):
-    print(''.join(file))
+def print_coordinates(coordinates):
+    print(str(len(coords)) + '\n\n') 
+    # the length of list is an integer that
+    # needs converting to a string before
+    # the newlines can be added
+    for coord in coordinates:
+        print(coord)
 
 def main():
 
-    file = """\
-    C  13.456 12.321 13.054
-    H  11.222 12.542 10.342
-    H  10.321  9.896  5.341
-    O   3.451  5.759  4.531
-    N   8.421  9.582 10.888"""
-
-    coords = read_file(file)
+    coords = read_file('coords.xyz')
     new_coords = modify_coords(coords)
     print_file(new_coords)
 
 main()
 
 Output:
+5
+
 C  6.0  13.456 12.321 13.054
 H  1.0  11.222 12.542 10.342
 H  1.0  10.321 9.896  5.341 

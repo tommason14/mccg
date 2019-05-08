@@ -8,12 +8,47 @@ We will use Python to automate tasks needed to be performed frequently in comput
 
 > This tutorial is valid for Python 3.6 or later.
 
+# How to use Python?
+
+Many machines will have Python2 and Python3 installed. To check this, type
+`python` into a command prompt.
+
+On MacOS:
+
+```bash
+$ python
+Python 2.7.16 (default, Apr 12 2019, 15:32:40)
+[GCC 4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.46.3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+As you can see, python2 is loaded. To access Python3, `python3` must be written.
+
+```bash
+$ python3
+Python 3.7.3 (default, Mar 27 2019, 09:23:15)
+[Clang 10.0.1 (clang-1001.0.46.3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+If Python3 is not installed, it can be downloaded from the Python online site or
+by using Homebrew, `brew install python3`.
+
+When typing `python` or `python3`, a prompt appears waiting for user input. This
+is the Python command line interpreter, allowing you to write Python code
+directly from the terminal. To re-use code, Python scripts can be saved to a
+file, usually with the `py` extension and run like so: `python3 file.py`
 
 # Python specifics
 
 Python relies on indentation to group lines of code together. Most languages use curly brackets, but by using white space, Python code is generally easier to read and write. Just try not to mix tabs with spaces as Python will not run if both are used. 
 
 An important concept in Python is that everything is an object, with a type. To find out what kind of object you are dealing with, use the function `type()`.
+
+Comments can be written in Python using the `#` symbol, and multi-line comments
+are wrapped in triple quotes.
 
 # Fundamental data types
 
@@ -543,20 +578,20 @@ print(str(len(new_coords)) + '\n\n')
 for line in new_coords:
     print(line)
 
-Output:
-5
-
-
-C  6.0  13.456 12.321 13.054
-
-H  1.0  11.222 12.542 10.342
-
-H  1.0  10.321 9.896  5.341
-
-O  8.0  3.451  5.759  4.531
-
-N  7.0  8.421  9.582  10.888
-
+# Output:
+# 5
+# 
+# 
+# C  6.0  13.456 12.321 13.054
+# 
+# H  1.0  11.222 12.542 10.342
+# 
+# H  1.0  10.321 9.896  5.341
+# 
+# O  8.0  3.451  5.759  4.531
+# 
+# N  7.0  8.421  9.582  10.888
+# 
 ```
 
 This block defines a dictionary of atomic numbers for carbon, hydrogen, nitrogen
@@ -565,17 +600,25 @@ then adds the number into
 the line and appends the new line to the `new_coords` list.
 
 The code can be re-written using functions, defining a function using the `def`
-keyword:
+keyword. Comments can be added to each function definition using triple quotes,
+called a docstring:
 
 ```python
 
 def read_file(file): 
+    """
+    Reads a file into Python, overlooking the first two lines. Returns a list
+    of the file contents
+    """
     
     with open(file, 'r') as f:
         contents = f.readlines()[2:]
     return contents
 
 def get_atomic_number(symbol):
+    """
+    Returns the atomic number of a given chemical element
+    """
 
     atnums = {}
     atnums['C'] = 6.0
@@ -586,12 +629,19 @@ def get_atomic_number(symbol):
     return atnums[symbol]    
 
 def add_atomic_number(line):
-
+    """
+    Finds the atomic number of the atom passed as an argument and returns a
+    formatted string including that atomic number
+    """
+    
     sym, x, y, z = line.split()
     atnum = get_atomic_number(sym) 
     return f"{sym:<2} {atnum:<4} {x:<6} {y:<6} {z:<6}\n"
 
 def modify_coords(coords):
+    """
+    Modifies coordinates and returns a new list
+    """
 
     new_coords = []
     for line in coords:
@@ -600,6 +650,9 @@ def modify_coords(coords):
     return new_coords
 
 def print_coordinates(coordinates):
+    """
+    Prints out the coordinates in an xyz format
+    """
 
     print(str(len(coords)) + '\n\n') 
     # the length of list is an integer that needs converting to a string before adding newlines
@@ -614,14 +667,14 @@ def main():
 
 main()
 
-Output:
-5
-
-C  6.0  13.456 12.321 13.054
-H  1.0  11.222 12.542 10.342
-H  1.0  10.321 9.896  5.341 
-O  8.0  3.451  5.759  4.531 
-N  7.0  8.421  9.582  10.888
+# Output:
+# 5
+# 
+# C  6.0  13.456 12.321 13.054
+# H  1.0  11.222 12.542 10.342
+# H  1.0  10.321 9.896  5.341 
+# O  8.0  3.451  5.759  4.531 
+# N  7.0  8.421  9.582  10.888
 ```
 
 In this example, the code using functions is longer than the procedural
@@ -640,3 +693,47 @@ for file in lst:
 
 It's that easy!
 
+# Python modules- using external code
+
+In Python, the `import` keyword gives you access to code that sits outside of
+the file that is being written. To include the math module that comes
+pre-installed with Python, type `import math`:
+
+```python
+>>> import math
+>>> math.pi
+3.141592653589793
+```
+
+Atrributes of the math module are accessed through `math.attribute`. As shown
+above, the value of $\pi$ can be obtained with `math.pi`. 
+
+To give an alias to an imported package, use `import ... as ...`
+
+```python
+import matplotlib.pyplot as plt
+```
+
+This saves you from having to type out `matplotlib.pyplot` every time you use code
+from that module.
+
+Many useful modules and packages have been written by others, and can be
+installed using the `pip` command from a shell prompt:
+
+To install the NumPy package:
+```bash
+pip install numpy
+```
+
+This command will download the NumPy package from the Python Package Index,
+PyPi, and install it in a location that Python can access by default. This
+location can be found by typing
+
+```python
+>>> import site
+>>> site.getsitepackages()
+['/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages']
+```
+
+Using the pointers given above, you can definitely start writing some useful
+programs! 

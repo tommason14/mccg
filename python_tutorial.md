@@ -1,4 +1,4 @@
-# Basics of Python
+# Python tutorial
 
 Bored of repeating the same tasks again and again? Let the computer do the work, make your life easier and free up time for more interesting tasks.
 
@@ -8,6 +8,33 @@ science to filesystem operations.
 We will use Python to automate tasks needed to be performed frequently in computational chemistry.
 
 > This tutorial is valid for Python 3.6 or later.
+
+# Table of Contents
+
+   * [How to use Python?](#how-to-use-python)
+   * [Python specifics](#python-specifics)
+   * [Fundamental data types](#fundamental-data-types)
+      * [Variables](#variables)
+      * [Strings](#strings)
+      * [Numerical values](#numerical-values)
+      * [Boolean values](#boolean-values)
+   * [Data structures](#data-structures)
+      * [Lists](#lists)
+      * [Tuples](#tuples)
+      * [Dictionaries](#dictionaries)
+      * [Conditional statements](#conditional-statements)
+   * [Loops](#loops)
+      * [For loops](#for-loops)
+      * [While loops](#while-loops)
+   * [File operations](#file-operations)
+   * [Functions](#functions)
+      * [Function arguments](#function-arguments)
+      * [Example use case](#example-use-case)
+   * [Python modules- using external code](#python-modules--using-external-code)
+   * [Have a go yourself](#have-a-go-yourself)
+   * [Advanced Python](#advanced-python)
+   * [Generators](#generators)
+   * [Classes](#classes)
 
 # How to use Python?
 
@@ -898,8 +925,8 @@ class Human:
 human = Human() # create an instance of the Human class
 print(human.hands) # each human has two hands
 
-Output:
-2
+# Output:
+# 2
 ```
 
 We can think of each instance of a class replacing the word `self`.

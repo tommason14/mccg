@@ -669,6 +669,21 @@ This forces you to write readable code- it is clear that the number 10 is being
 assigned to the variable `val2`. Here, val2 is known as a keyword argument,
 defining the name of the argument in the function call.
 
+To return objects from a function, simply use the `return` keyword:
+```python
+
+def add_10(num):
+    return num + 10
+
+result = add_10()
+print(result)
+
+# Output:
+# 20 
+```
+
+The result was passed from the function and stored in the variable `result`.
+
 ## Example use case
 
 To add atomic numbers to a list of coordinates in an xyz format,
@@ -843,7 +858,7 @@ installed using the `pip` command from a shell prompt:
 
 To install the NumPy package:
 ```bash
-pip install numpy
+$ pip install numpy
 ```
 
 This command will download the NumPy package from the Python Package Index,
@@ -872,6 +887,8 @@ and classes.
 
 # Classes
 
+## Thought process
+
 Writing functions are very useful, enabling the user to calling the same block
 of code over and over. However, there is another branch of programming that
 allows users to write code in terms of real-world objects, called
@@ -879,14 +896,14 @@ object-oriented programming.
 
 In the real-world, objects have physical attributes and behaviour. For example,
 humans have fingers, they have age, a height, and a weight. These are all
-atrributes. Behaviours associated with humans include speaking, eating and
+attributes. Behaviours associated with humans include speaking, eating and
 walking. In OOP, variables are known as attributes, and functions relating to
 the behaviour of an object are called methods.
 
 Objects can be written as classes, with the syntax `class object`. At the start
-of the tutorial, I [mentioned](#python-specifics) that everything in Python is an object with a
-defined type. This means that when we create a list, all we are doing is
-creating an *instance* of the `list` class.
+of the tutorial, I [mentioned](#python-specifics) that everything in Python is
+an object with a defined type. This means that when we create a list, all we are
+doing is creating an *instance* of the `list` class.
 
 ```python
 >>> lst = list() # create an instance of the list class
@@ -905,12 +922,15 @@ human = Human()
 human.hands = 2
 ```
 
+## \_\_init\_\_
+
 We know that humans should have two hands- that shouldn't be something that a
-user has to add manually. So we can assign a `hands` attribute to every example of
-a Human that we create when calling the `Human` class i,e. `human = Human()`
-To do this, we use the `__init__` method, a reserved name in Python. Even
-though it is not explicitly declared in Python3, every class in Python is an instance of the
-`Object` class, and have an `__init__` method with the first argument of `self`.
+user has to add manually. So we can assign a `hands` attribute to every example
+of a Human that we create when calling the `Human` class i.e. `human = Human()`
+To do this, we use the `__init__` method, a reserved name in Python. Even though
+it is not explicitly declared in Python3, every user-defined class in Python is
+derived from the `Object` class, and can have an `__init__` method with the
+first argument of `self`.
 
 The attributes of each instance are tied to the class by using the `self`
 keyword. For example, creating a `Human` class with two hands:
@@ -919,7 +939,7 @@ keyword. For example, creating a `Human` class with two hands:
 class Human:
 
     def __init__(self)
-    self.hands = 2
+        self.hands = 2
 
 
 human = Human() # create an instance of the Human class
@@ -930,3 +950,84 @@ print(human.hands) # each human has two hands
 ```
 
 We can think of each instance of a class replacing the word `self`.
+
+We can also assign items to each instance of the class when we *instantiate* the
+class. As the `__init__` method is essentially a Python function, we just add
+items to the function definition, and then assign them to the object by using
+the `self` keyword:
+
+```python
+class Human:
+
+    def __init__(self, name, age, height):
+        self.hands = 2
+        self.name = name
+        self.age = age
+        self.height = height # in cm
+    
+```
+
+The values can then be passed in when creating the object instance:
+
+```python
+mike = Human('Mike', 19, 170)
+print("Mike's age =", mike.age)
+print("Mike's height =", mike.height, "cm")
+
+# Output:
+# Mike's age = 19
+# Mike's height = 170 cm
+```
+
+> Aside: the double underscore indicates a reserved value in Python. An instance of the
+> `Object` class uses a double underscore, or 'dunder' method, in a certain way.
+> See [here](#data-model).
+> A single underscore denotes a 'private' variable, something that shouldn't be
+> touched outside of the class definition. In other languages such as Java,
+> trying to modify a private variable outside the class definition results in an
+> error.
+
+We can also add behaviour so that our `Human` object acts like a real person.
+This is done by adding methods to the class definition. We can create a method
+that increases a person's age when they have a birthday:
+
+```python
+class Human:
+
+    def __init__(self, name, age, height):
+        self.hands = 2
+        self.name = name
+        self.age = age
+        self.height = height # in cm
+
+    def had_birthday(self):
+        self.age += 1
+    
+```
+
+Two important things to note. Firstly, the self keyword is required as an
+argument to modify parameters of each instance of the class. Secondly, the age
+doesn't need to be returned from the method, as the age attribute is tied to the
+class instance. In other words, calling the method automatically modifies the
+attributes in the method, there is no need to return the value and save it into
+a variable.
+
+```python
+
+kate = Human('Kate', 29, 180)
+print("Kate's age =", kate.age)
+print('Kate had a birthday')
+kate.had_birthday()
+print("Kate's age =", kate.age)
+
+# Output:
+# Kate's age = 29
+# Kate had a birthday
+# Kate's age = 30
+```
+
+We can see that calling `kate.had_birthday()` increased her age by a year.
+
+## Inheritance
+
+## Data model

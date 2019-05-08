@@ -564,7 +564,9 @@ and oxygen, reads in the coordinates, finds the corresponding atomic number,
 then adds the number into
 the line and appends the new line to the `new_coords` list.
 
-The code can be re-written using functions for clarity:
+The code can be re-written using functions, defining a function using the `def`
+keyword:
+
 ```python
 
 def read_file(file): 
@@ -590,6 +592,7 @@ def add_atomic_number(line):
     return f"{sym:<2} {atnum:<4} {x:<6} {y:<6} {z:<6}\n"
 
 def modify_coords(coords):
+
     new_coords = []
     for line in coords:
         line = add_atomic_number(line)
@@ -597,10 +600,9 @@ def modify_coords(coords):
     return new_coords
 
 def print_coordinates(coordinates):
+
     print(str(len(coords)) + '\n\n') 
-    # the length of list is an integer that
-    # needs converting to a string before
-    # the newlines can be added
+    # the length of list is an integer that needs converting to a string before adding newlines
     for coord in coordinates:
         print(coord)
 

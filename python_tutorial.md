@@ -36,13 +36,13 @@ We will use Python to automate tasks needed to be performed frequently in comput
    * [Python modules- using external code](#python-modules--using-external-code)
    * [Have a go yourself](#have-a-go-yourself)
    * [Advanced Python](#advanced-python)
-   * [Generators](#generators)
+   <!-- * [Generators](#generators) -->
    * [Classes](#classes)
       * [Thought process](#thought-process)
       * [Writing your own classes](#writing-your-own-classes)
       * [__init__](#__init__)
-      * [Inheritance](#inheritance)
-      * [Data model](#data-model)
+      <!-- * [Inheritance](#inheritance) -->
+      <!-- * [Data model](#data-model) -->
   
 
 # How to use Python?
@@ -923,7 +923,7 @@ and classes.
 
 # Advanced Python 
 
-# Generators
+<!-- # Generators -->
 
 # Classes
 
@@ -1027,10 +1027,6 @@ print("Mike's height =", mike.height, "cm")
 > Aside: the double underscore indicates a reserved value in Python. An instance of the
 > `Object` class uses a double underscore, or 'dunder' method, in a certain way.
 > See [here](#data-model).
-> A single underscore denotes a 'private' variable, something that shouldn't be
-> touched outside of the class definition. In other languages such as Java,
-> trying to modify a private variable outside the class definition results in an
-> error.
 
 We can also add behaviour so that our `Human` object acts like a real person.
 This is done by adding methods to the class definition. We can create a method
@@ -1047,14 +1043,13 @@ class Human:
 
     def had_birthday(self):
         self.age += 1
-    
 ```
 
 Two important things to note. Firstly, the self keyword is required as an
 argument to modify parameters of each instance of the class. Secondly, the age
 doesn't need to be returned from the method, as the age attribute is tied to the
 class instance. In other words, calling the method automatically modifies the
-attributes in the method, there is no need to return the value and save it into
+attributes in the method- there is no need to return the value and save it into
 a variable.
 
 ```python
@@ -1073,6 +1068,6 @@ print("Kate's age =", kate.age)
 
 We can see that calling `kate.had_birthday()` increased her age by a year.
 
-## Inheritance
+<!-- ## Inheritance -->
 
-## Data model
+<!-- ## Data model -->
